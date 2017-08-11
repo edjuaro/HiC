@@ -17,6 +17,12 @@ n_samples, n_features = X.shape
 np.random.seed(0)
 
 
+# a custom function that just computes Euclidean distance
+def mydist(p1, p2):
+    diff = p1 - p2
+    return np.vdot(diff, diff) ** 0.5
+
+
 def nudge_images(X, y):
     # Having a larger dataset shows more clearly the behavior of the
     # methods, but we multiply the size of the dataset only by 2, as the
@@ -61,8 +67,8 @@ print("Done.")
 
 from sklearn.cluster import AgglomerativeClustering
 
-for linkage in ('ward', 'average', 'complete'):
-    clustering = AgglomerativeClustering(linkage=linkage, n_clusters=10)
+for linkage in ('average',):
+    clustering = AgglomerativeClustering(linkage=linkage, n_clusters=10, affinity=mydist)
     t0 = time()
     clustering.fit(X_red)
     print("%s : %.2fs" % (linkage, time() - t0))
