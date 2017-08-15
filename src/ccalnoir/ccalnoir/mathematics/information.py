@@ -181,6 +181,7 @@ def information_coefficient(x, y, n_grids=25,
 
     # Compute information coefficient
     ic = sign(cor) * sqrt(1 - exp(-2 * mi))
+    # ic = sign(cor) * sqrt(1 - exp(-2 * mi))
 
     # TODO: debug when MI < 0 and |MI|  ~ 0 resulting in IC = nan
     if isnan(ic):
